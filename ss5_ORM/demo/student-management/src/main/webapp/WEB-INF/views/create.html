@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>Create Student</h3>
+<p>
+    <a th:href="@{/student}">
+        Back to student list
+    </a>
+</p>
+<div id="form">
+    <form action="#" th:action="@{/student/save}"
+          method="POST" novalidate="novalidate" th:object="${student}">
+        <input type="hidden" th:field="*{id}"/>
+        <div>
+            <label>Name</label>
+            <input type="text" th:field="*{name}"/>
+        </div>
+        <div>
+            <label>Gender: </label>
+            <input type="radio" th:field="*{gender}" th:value="0"/>Female
+            <input type="radio" th:field="*{gender}" th:value="1"/>Male
+            <input type="radio" th:field="*{gender}" th:value="3"/>LGBT
+        </div>
+        <input type="submit" value="Save"/>
+    </form>
+</div>
+<footer th:replace="layout::footer"></footer>
+</body>
+</html>

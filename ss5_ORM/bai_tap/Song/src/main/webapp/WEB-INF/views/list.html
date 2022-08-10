@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>Song</h3>
+<p>
+    <a th:href="@{/song/create}">
+        Add new song
+    </a>
+</p>
+<div>
+    <table id="song">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Name</th>
+                <th>Singer</th>
+                <th>Kind</th>
+                <th>Link</th>
+                <th>Edit</th>
+                <th>Delete</th>
+                <th>View</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="song, state :${song}">
+                <td th:text="${state.count}"></td>
+                <td th:text="${song.name}"></td>
+                <td th:text="${song.singer}"></td>
+                <td th:text="${song.kind}"></td>
+                <td th:text="${song.link}"></td>
+
+                <td><a th:href="@{song/{id}/edit(id= ${song.getId()})}">Edit</a></td>
+                <td><a th:href="@{song/{id}/delete(id= ${song.getId()})}">Delete</a></td>
+                <td><a th:href="@{song/{id}/view(id= ${song.getId()})}">View</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<footer th:replace="layout::footer"></footer>
+</body>
+</html>
