@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer List</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.2.0/css/bootstrap.min.css">
+    <script type="text/javascript" src="/webjars/jquery/3.6.1/dist/jquery.min.js"></script>
+</head>
+<a href="/create-customer">Create new customer</a>
+<h1>Customers</h1>
+<form>
+    Search by...:
+    <input name="search" type="text"/>
+    <input type="submit" value="Search"/>
+</form>
+<br/>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Birthday</th>
+        <th scope="col">Address</th>
+        <th scope="col">Email</th>
+        <th scope="col">CustomerType</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+    </tr>
+
+    </thead>
+    <tbody>
+    <th:block  th:each="customer : ${customer}">
+    <tr>
+        <td th:text="${customer.customerName}"></td>
+        <td th:text="${customer.birthDate}"></td>
+        <td th:text="${customer.address}"></td>
+        <td th:text="${customer.email}"></td>
+        <td th:if="${customer.customerType}" th:text="${customer.customerType.customerTypeName}"></td>
+        <td th:unless="${customer.customerType}"></td>
+        <td><a th:href="@{/edit-customer/__${customer.customerId}__ }">Edit</a></td>
+        <td><a th:href="@{/delete-customer/__${customer.customerId}__ }">Delete</a></td>
+    </tr>
+    </th:block>
+<!--    <tr>-->
+<!--        <th scope="row">2</th>-->
+<!--        <td>Jacob</td>-->
+<!--        <td>Thornton</td>-->
+<!--        <td>@fat</td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--        <th scope="row">3</th>-->
+<!--        <td colspan="2">Larry the Bird</td>-->
+<!--        <td>@twitter</td>-->
+<!--    </tr>-->
+    </tbody>
+</table>
+
+<!--<table border="1">-->
+<!--    <tr>-->
+<!--        <th>Name</th>-->
+<!--        <th>Birthday</th>-->
+<!--        <th>Address</th>-->
+<!--        <th>Email</th>-->
+<!--        <th>CustomerType</th>-->
+<!--        <th>Edit</th>-->
+<!--        <th>Delete</th>-->
+
+<!--    </tr>-->
+<!--    <th:block th:each="customer : ${customer}">-->
+<!--        <tr>-->
+<!--            <td th:text="${customer.customerName}"></td>-->
+<!--            <td th:text="${customer.birthDate}"></td>-->
+<!--            <td th:text="${customer.address}"></td>-->
+<!--            <td th:text="${customer.email}"></td>-->
+
+<!--            <td th:if="${customer.customerType}" th:text="${customer.customerType.customerTypeName}"></td>-->
+<!--            <td th:unless="${customer.customerType}"></td>-->
+<!--            <td><a th:href="@{/edit-customer/__${customer.customerId}__ }">Edit</a></td>-->
+<!--            <td><a th:href="@{/delete-customer/__${customer.customerId}__ }">Delete</a></td>-->
+<!--        </tr>-->
+<!--    </th:block>-->
+<!--    <div>-->
+<!--        <a th:href="@{'/customer'(page=${customer.number - 1})}" th:if="${customer.hasPrevious()}">Previous</a>-->
+<!--        <span th:text="${customer.number + 1}"></span>/<span th:text="${customer.totalPages}"></span>-->
+<!--        <a th:href="@{'/customer'(page=${customer.number + 1})}" th:if="${customer.hasNext()}">Next</a>-->
+<!--    </div>-->
+</table>
+</body>
+</html>
